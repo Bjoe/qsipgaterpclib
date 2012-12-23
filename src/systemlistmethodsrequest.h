@@ -2,10 +2,8 @@
 #define QSIPGATERPCLIB_SYSTEMLISTMETHODSREQUEST_H
 
 #include <QObject>
-#include <QVariantMap>
 
 #include "abstractrequest.h"
-
 #include "systemlistmethodshandler.h"
 
 namespace qsipgaterpclib
@@ -20,8 +18,8 @@ public:
     virtual SystemListMethodsHandler *getHandler();
 
 private:
-    SystemListMethodsHandler *handler;
     SystemListMethodsRequest(QObject *aParent = 0);
+    SystemListMethodsHandler *handler;
 
     friend class SystemListMethodsRequestFactory;
 };
@@ -36,7 +34,7 @@ public:
 
     SystemListMethodsRequest *build()
     {
-        return new SystemListMethodsRequest();
+        return request;
     }
 
 private:

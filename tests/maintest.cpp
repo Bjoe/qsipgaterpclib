@@ -6,9 +6,11 @@
 
 #include "rpcclientfactory.h"
 #include "rpchandler.h"
+#include "output.h"
+
 #include "systemlistmethodshandler.h"
 #include "systemlistmethodsrequest.h"
-#include "output.h"
+#include "systemlistmethodsresponse.h"
 
 int main(int argc, char *argv[])
 {
