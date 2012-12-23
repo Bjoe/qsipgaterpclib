@@ -48,6 +48,10 @@ qt4_add_test(systemlistmethodsrequest systemlistmethodsrequesttest.cpp)
 qt4_add_test(systemlistmethodshandler systemlistmethodshandlertest.cpp)
 qt4_add_test(systemlistmethodsresponse systemlistmethodsresponsetest.cpp)
 
+qt4_test(systemmethodhelprequest systemmethodhelprequesttest.cpp)
+qt4_test(systemmethodhelphandler systemmethodhelphandlertest.cpp)
+qt4_test(systemmethodhelpresponse systemmethodhelpresponsetest.cpp)
+
 qt4_wrap_cpp(MOC_OUTFILES output.h)
 add_executable(sipgateRpcTest maintest.cpp output.cpp ${MOC_OUTFILES})
 target_link_libraries(sipgateRpcTest sipgateRpcLib ${QT_LIBRARIES} ${QXT_QXTCORE_LIB_RELEASE} ${QXT_QXTNETWORK_LIB_RELEASE})

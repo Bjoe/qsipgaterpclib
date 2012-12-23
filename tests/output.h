@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "systemlistmethodsresponse.h"
+#include "systemmethodhelpresponse.h"
 
 namespace tests {
 
@@ -13,7 +14,8 @@ public:
     explicit Output(QObject *parent = 0);
     
 public slots:
-    void doDisplayResponse(qsipgaterpclib::SystemListMethodsResponse aResponse);
+    void doDisplayListMethodsResponse(qsipgaterpclib::SystemListMethodsResponse aResponse);
+    void doDisplayMethodHelpResponse(qsipgaterpclib::SystemMethodHelpResponse aResponse);
     void doDisplayError(QString anError);
 };
 

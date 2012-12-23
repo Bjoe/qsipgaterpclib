@@ -12,6 +12,10 @@
 #include "systemlistmethodsrequest.h"
 #include "systemlistmethodsresponse.h"
 
+#include "systemmethodhelphandler.h"
+#include "systemmethodhelprequest.h"
+#include "systemmethodhelpresponse.h"
+
 int main(int argc, char *argv[])
 {
     QCoreApplication app(argc, argv);
@@ -26,6 +30,8 @@ int main(int argc, char *argv[])
     std::cout << "Init rpcHandler" << std::endl;
     qsipgaterpclib::RpcHandler *rpcHandler = new qsipgaterpclib::RpcHandler(xmlRpcClient);
 
+
+/*
     std::cout << "Init request" << std::endl;
     qsipgaterpclib::SystemListMethodsRequest *request = qsipgaterpclib::SystemListMethodsRequestFactory::createInstance()
             .build();
@@ -41,6 +47,29 @@ int main(int argc, char *argv[])
                      output, SLOT(doDisplayError(QString)));
     QObject::connect(handler, SIGNAL(ready(qsipgaterpclib::SystemListMethodsResponse)),
                      output, SLOT(doDisplayResponse(qsipgaterpclib::SystemListMethodsResponse)));
+*/
+
+
+    std::cout << "Init request" << std::endl;
+    qsipgaterpclib::SystemMethodHelpRequest *request =
+            qsipgaterpclib::SystemMethodHelpRequestFactory::createInstance()
+            .withMethodName("TosListGet")
+            .build();
+
+    std::cout << "Get handler" << std::endl;
+    qsipgaterpclib::SystemMethodHelpHandler *handler = request->getHandler();
+
+    std::cout << "Create output" << std::endl;
+    tests::Output *output = new tests::Output();
+    QObject::connect(rpcHandler, SIGNAL(error(QString)),
+                     output, SLOT(doDisplayError(QString)));
+    QObject::connect(handler, SIGNAL(error(QString)),
+                     output, SLOT(doDisplayError(QString)));
+    QObject::connect(handler, SIGNAL(ready(qsipgaterpclib::SystemMethodHelpResponse)),
+                     output, SLOT(doDisplayMethodHelpResponse(qsipgaterpclib::SystemMethodHelpResponse)));
+
+
+
 
     std::cout << "send rpc request" << std::endl;
     rpcHandler->sendRpcRequest(request);
