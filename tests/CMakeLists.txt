@@ -42,7 +42,7 @@ set(test_additional_lib
 
 qt4_add_test(rpcclientfactory rpcclientfactorytest.cpp)
 qt4_add_test(rpchandler rpchandlertest.cpp)
-qt4_add_test(abstractrequest abstractrequesttest.cpp)
+qt4_test(abstractrequest abstractrequesttest.cpp)
 qt4_add_test(abstracthandler abstracthandlertest.cpp)
 qt4_add_test(systemlistmethodsrequest systemlistmethodsrequesttest.cpp)
 qt4_add_test(systemlistmethodshandler systemlistmethodshandlertest.cpp)

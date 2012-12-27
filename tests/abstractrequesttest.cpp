@@ -1,4 +1,5 @@
-#include "abstractrequesttest.h"
+#include <QObject>
+#include <QtTest/QtTest>
 
 #include "abstractrequest.h"
 
@@ -16,6 +17,14 @@
 #include "mockabstractrequest.h"
 
 namespace tests {
+
+class AbstractRequestTest : public QObject
+{
+    Q_OBJECT
+
+private slots:
+    void testCreateInstance();
+};
 
 void AbstractRequestTest::testCreateInstance()
 {
@@ -35,4 +44,4 @@ void AbstractRequestTest::testCreateInstance()
 } // namespace tests
 
 QTEST_GMOCK_MAIN(tests::AbstractRequestTest)
-#include "abstractrequesttest.moc"
+#include "moc_abstractrequesttest.cxx"
