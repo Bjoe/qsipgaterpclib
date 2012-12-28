@@ -5,13 +5,21 @@
 namespace qsipgaterpclib {
 
 SystemListMethodsRequest::SystemListMethodsRequest(QObject *aParent) :
-    AbstractRequest("system.listMethods", aParent), handler(new SystemListMethodsHandler(aParent))
+    AbstractRequest("system.listMethods", aParent)
 {
 }
 
-SystemListMethodsHandler *SystemListMethodsRequest::getHandler()
+bool SystemListMethodsRequest::createResponse(const QVariantMap &aVariant)
 {
-    return handler;
+    bool result = false;
+    QVariant variant = aVariant.value("listMethods");
+    if(variant.isValid()) {
+        QVariantList methodsList = variant.toList();
+        SystemListMethodsResponse response(methodsList);
+        emit ready(response);
+        result = true;
+    }
+    return result;
 }
 
 } // namespace qsipgaterpclib

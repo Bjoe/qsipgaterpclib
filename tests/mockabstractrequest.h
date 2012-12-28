@@ -10,8 +10,6 @@
 
 #include "abstractrequest.h"
 
-#include "abstracthandler.h"
-
 namespace tests
 {
 
@@ -21,7 +19,13 @@ public:
     MockAbstractRequest(const QString &aMethod, QObject *aParent = 0) : AbstractRequest(aMethod, aParent)
     {}
 
-    MOCK_METHOD0(getHandler, qsipgaterpclib::AbstractHandler*());
+    void invokeHandleResponse(const QVariant &aVariant)
+    {
+        AbstractRequest::handleResponse(aVariant);
+    }
+
+    MOCK_METHOD1(handleResponse, void(const QVariant &aVariant));
+    MOCK_METHOD1(createResponse, bool(const QVariantMap &aVariant));
 };
 
 }

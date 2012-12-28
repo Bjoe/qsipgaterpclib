@@ -1,11 +1,9 @@
 
 set(QT_MOC_HEADERS
     rpchandler.h
-    abstracthandler.h
-    systemlistmethodshandler.h
-    systemmethodhelphandler.h
+    systemlistmethodsrequest.h
+    systemmethodhelprequest.h
     abstractrequest.h
-    #systemlistmethodsrequest.h
 )
 
 set(QT_UI
@@ -13,12 +11,9 @@ set(QT_UI
 
 set(QT_SRCS
     rpchandler.cpp
-    abstracthandler.cpp
     abstractrequest.cpp
-    systemlistmethodshandler.cpp
     systemlistmethodsrequest.cpp
     systemlistmethodsresponse.cpp
-    systemmethodhelphandler.cpp
     systemmethodhelprequest.cpp
     systemmethodhelpresponse.cpp
 )

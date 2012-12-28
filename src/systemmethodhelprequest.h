@@ -6,9 +6,10 @@
 #include <QVariant>
 #include <QHash>
 #include <QVariantList>
+#include <QVariantMap>
 
 #include "abstractrequest.h"
-#include "systemmethodhelphandler.h"
+#include "systemmethodhelpresponse.h"
 
 namespace qsipgaterpclib {
 
@@ -16,14 +17,18 @@ class SystemMethodHelpRequestFactory;
 
 class SystemMethodHelpRequest : public AbstractRequest
 {
+    Q_OBJECT
+
 public:
     virtual ~SystemMethodHelpRequest() {}
 
-    virtual SystemMethodHelpHandler *getHandler();
+    virtual bool createResponse(const QVariantMap &aVariant);
+
+signals:
+    void ready(qsipgaterpclib::SystemMethodHelpResponse aResponse);
 
 private:
     SystemMethodHelpRequest(QObject *aParent = 0);
-    SystemMethodHelpHandler *handler;
 
     friend class SystemMethodHelpRequestFactory;
 };

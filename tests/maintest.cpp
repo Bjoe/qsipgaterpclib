@@ -8,11 +8,9 @@
 #include "rpchandler.h"
 #include "output.h"
 
-#include "systemlistmethodshandler.h"
 #include "systemlistmethodsrequest.h"
 #include "systemlistmethodsresponse.h"
 
-#include "systemmethodhelphandler.h"
 #include "systemmethodhelprequest.h"
 #include "systemmethodhelpresponse.h"
 
@@ -37,15 +35,14 @@ int main(int argc, char *argv[])
             .build();
 
     std::cout << "Get handler" << std::endl;
-    qsipgaterpclib::SystemListMethodsHandler *handler = request->getHandler();
 
     std::cout << "Create output" << std::endl;
     tests::Output *output = new tests::Output();
     QObject::connect(rpcHandler, SIGNAL(error(QString)),
                      output, SLOT(doDisplayError(QString)));
-    QObject::connect(handler, SIGNAL(error(QString)),
+    QObject::connect(request, SIGNAL(error(QString)),
                      output, SLOT(doDisplayError(QString)));
-    QObject::connect(handler, SIGNAL(ready(qsipgaterpclib::SystemListMethodsResponse)),
+    QObject::connect(request, SIGNAL(ready(qsipgaterpclib::SystemListMethodsResponse)),
                      output, SLOT(doDisplayResponse(qsipgaterpclib::SystemListMethodsResponse)));
 */
 
@@ -57,15 +54,14 @@ int main(int argc, char *argv[])
             .build();
 
     std::cout << "Get handler" << std::endl;
-    qsipgaterpclib::SystemMethodHelpHandler *handler = request->getHandler();
 
     std::cout << "Create output" << std::endl;
     tests::Output *output = new tests::Output();
     QObject::connect(rpcHandler, SIGNAL(error(QString)),
                      output, SLOT(doDisplayError(QString)));
-    QObject::connect(handler, SIGNAL(error(QString)),
+    QObject::connect(request, SIGNAL(error(QString)),
                      output, SLOT(doDisplayError(QString)));
-    QObject::connect(handler, SIGNAL(ready(qsipgaterpclib::SystemMethodHelpResponse)),
+    QObject::connect(request, SIGNAL(ready(qsipgaterpclib::SystemMethodHelpResponse)),
                      output, SLOT(doDisplayMethodHelpResponse(qsipgaterpclib::SystemMethodHelpResponse)));
 
 

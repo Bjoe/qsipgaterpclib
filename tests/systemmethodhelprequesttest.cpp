@@ -3,8 +3,6 @@
 
 #include "systemmethodhelprequest.h"
 
-#include "systemmethodhelphandler.h"
-
 #include <QString>
 #include <QVariantList>
 
@@ -16,7 +14,8 @@ class SystemMethodHelpRequestTest : public QObject
 
 private slots:
     void testCreateInstance();
-    void testGetHandler();
+    void testCreateResponse();
+    void testCreateResponseFailed();
 };
 
 void SystemMethodHelpRequestTest::testCreateInstance()
@@ -31,11 +30,38 @@ void SystemMethodHelpRequestTest::testCreateInstance()
     QCOMPARE(map.value("MethodName"), QVariant(QString("foo.bar")));
 }
 
-void SystemMethodHelpRequestTest::testGetHandler()
+void SystemMethodHelpRequestTest::testCreateResponse()
 {
-    qsipgaterpclib::SystemMethodHelpRequest *request = qsipgaterpclib::SystemMethodHelpRequestFactory::createInstance().build();
-    qsipgaterpclib::SystemMethodHelpHandler *handler = request->getHandler();
+    qsipgaterpclib::SystemMethodHelpRequest *request =
+            qsipgaterpclib::SystemMethodHelpRequestFactory::createInstance()
+            .withMethodName("foo.bar")
+            .build();
 
+    QSignalSpy signalSpy(request, SIGNAL(ready(qsipgaterpclib::SystemMethodHelpResponse)));
+
+    QVariant variant(QString("Help Message"));
+    QVariantMap variantMap;
+    variantMap.insert("methodHelp", variant);
+    QVERIFY(request->createResponse(variantMap) == true);
+
+    QCOMPARE(signalSpy.count(), 1);
+    QList<QVariant> arguments = signalSpy.takeFirst();
+    QCOMPARE(arguments.count(), 1);
+}
+
+void SystemMethodHelpRequestTest::testCreateResponseFailed()
+{
+    qsipgaterpclib::SystemMethodHelpRequest *request =
+            qsipgaterpclib::SystemMethodHelpRequestFactory::createInstance()
+            .withMethodName("foo.bar")
+            .build();
+
+    QSignalSpy signalSpy(request, SIGNAL(ready(qsipgaterpclib::SystemMethodHelpResponse)));
+
+    QVariantMap variantMap;
+    QVERIFY(request->createResponse(variantMap) == false);
+
+    QCOMPARE(signalSpy.count(), 0);
 }
 
 }

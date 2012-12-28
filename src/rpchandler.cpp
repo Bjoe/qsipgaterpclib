@@ -3,7 +3,7 @@
 namespace qsipgaterpclib {
 
 RpcHandler::RpcHandler(QxtXmlRpcClient *aXmlRpcClient, QObject *aParent) :
-    QObject(aParent), xmlRpcClient(aXmlRpcClient), rpcCall(0), requestHandler(0)
+    QObject(aParent), xmlRpcClient(aXmlRpcClient), rpcCall(0), request(0)
 {
 }
 
@@ -16,8 +16,8 @@ RpcHandler::~RpcHandler()
 
 bool RpcHandler::sendRpcRequest(AbstractRequest *aRequest)
 {
-    requestHandler = aRequest->getHandler();
-    rpcCall = xmlRpcClient->call(aRequest->getMethod(), aRequest->getArguments());
+    request = aRequest;
+    rpcCall = xmlRpcClient->call(request->getMethod(), request->getArguments());
 
     connect(rpcCall, SIGNAL(error(QNetworkReply::NetworkError)), SLOT(rpcError(QNetworkReply::NetworkError)));
     connect(rpcCall, SIGNAL(sslErrors(const QList<QSslError> &)), SLOT(rpcSslErrors(const QList<QSslError> &)));
@@ -26,8 +26,8 @@ bool RpcHandler::sendRpcRequest(AbstractRequest *aRequest)
 
 void RpcHandler::rpcFinished()
 {
-    if(requestHandler != 0 && rpcCall != 0) {
-        requestHandler->handleResponse(rpcCall->result());
+    if(request != 0 && rpcCall != 0) {
+        request->handleResponse(rpcCall->result());
     }
 }
 

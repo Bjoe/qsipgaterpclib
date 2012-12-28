@@ -9,7 +9,6 @@
 #include <QxtXmlRpcClient>
 #include <QxtXmlRpcCall>
 
-#include "abstracthandler.h"
 #include "abstractrequest.h"
 
 namespace qsipgaterpclib
@@ -36,7 +35,7 @@ public slots:
 private:
     QxtXmlRpcClient *xmlRpcClient;
     QxtXmlRpcCall *rpcCall;
-    AbstractHandler *requestHandler;
+    AbstractRequest *request;
 };
 
 } // namespace qsipgaterpclib

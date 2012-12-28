@@ -12,7 +12,6 @@
 #include <QxtXmlRpcClient>
 
 #include "mockabstractrequest.h"
-#include "mockabstracthandler.h"
 #include "testconfig.h"
 
 Q_DECLARE_METATYPE(QList<QSslError>)
@@ -29,14 +28,9 @@ void RpcHandlerTest::testSendRequest()
     qsipgaterpclib::RpcHandler *handler = new qsipgaterpclib::RpcHandler(rpcClient);
 
     MockAbstractRequest mock("mock");
-    MockAbstractHandler mockHandler;
-    EXPECT_CALL(mock, getHandler()).Times(1)
-            .WillOnce(Return(&mockHandler));
-    EXPECT_CALL(mockHandler, handleResponse(_)).Times(0);
-
     handler->sendRpcRequest(&mock);
 
-    EXPECT_CALL(mockHandler, handleResponse(_)).Times(1);
+    EXPECT_CALL(mock, handleResponse(_)).Times(1);
 
     handler->rpcFinished();
 }

@@ -3,9 +3,9 @@
 
 #include <QObject>
 #include <QString>
+#include <QVariant>
+#include <QVariantMap>
 #include <QVariantList>
-
-#include "abstracthandler.h"
 
 namespace qsipgaterpclib {
 
@@ -31,7 +31,13 @@ public:
         return arguments;
     }
 
-    virtual AbstractHandler *getHandler() =0;
+    virtual void handleResponse(const QVariant &aVariant);
+
+signals:
+    void error(QString aMessage);
+
+protected:
+    virtual bool createResponse(const QVariantMap &aVariant) =0;
 
 private:
     QVariantList arguments;
