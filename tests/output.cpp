@@ -28,6 +28,13 @@ void Output::doDisplayMethodHelpResponse(qsipgaterpclib::SystemMethodHelpRespons
     std::cout << help.toAscii().constData() << std::endl;
 }
 
+void Output::doDisplayMethodSignatureResponse(qsipgaterpclib::SystemMethodSignatureResponse aResponse)
+{
+    std::cout << "output: " << std::endl;
+    QString help = aResponse.getSignature();
+    std::cout << help.toAscii().constData() << std::endl;
+}
+
 void Output::doDisplayError(QString anError)
 {
     std::cout << "Error: " << anError.toAscii().constData() << std::endl;

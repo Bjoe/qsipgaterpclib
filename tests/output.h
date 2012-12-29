@@ -4,6 +4,7 @@
 #include <QObject>
 #include "systemlistmethodsresponse.h"
 #include "systemmethodhelpresponse.h"
+#include "systemmethodsignatureresponse.h"
 
 namespace tests {
 
@@ -16,6 +17,7 @@ public:
 public slots:
     void doDisplayListMethodsResponse(qsipgaterpclib::SystemListMethodsResponse aResponse);
     void doDisplayMethodHelpResponse(qsipgaterpclib::SystemMethodHelpResponse aResponse);
+    void doDisplayMethodSignatureResponse(qsipgaterpclib::SystemMethodSignatureResponse aResponse);
     void doDisplayError(QString anError);
 };
 

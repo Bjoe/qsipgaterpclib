@@ -14,6 +14,9 @@
 #include "systemmethodhelprequest.h"
 #include "systemmethodhelpresponse.h"
 
+#include "systemmethodsignaturerequest.h"
+#include "systemmethodsignatureresponse.h"
+
 int main(int argc, char *argv[])
 {
     QCoreApplication app(argc, argv);
@@ -46,7 +49,7 @@ int main(int argc, char *argv[])
                      output, SLOT(doDisplayResponse(qsipgaterpclib::SystemListMethodsResponse)));
 */
 
-
+/*
     std::cout << "Init request" << std::endl;
     qsipgaterpclib::SystemMethodHelpRequest *request =
             qsipgaterpclib::SystemMethodHelpRequestFactory::createInstance()
@@ -63,7 +66,25 @@ int main(int argc, char *argv[])
                      output, SLOT(doDisplayError(QString)));
     QObject::connect(request, SIGNAL(ready(qsipgaterpclib::SystemMethodHelpResponse)),
                      output, SLOT(doDisplayMethodHelpResponse(qsipgaterpclib::SystemMethodHelpResponse)));
+*/
 
+
+    std::cout << "Init request" << std::endl;
+    qsipgaterpclib::SystemMethodSignatureRequest *request =
+            qsipgaterpclib::SystemMethodSignatureRequestFactory::createInstance()
+            .withMethodName("samurai.OwnUriListGet")
+            .build();
+
+    std::cout << "Get handler" << std::endl;
+
+    std::cout << "Create output" << std::endl;
+    tests::Output *output = new tests::Output();
+    QObject::connect(rpcHandler, SIGNAL(error(QString)),
+                     output, SLOT(doDisplayError(QString)));
+    QObject::connect(request, SIGNAL(error(QString)),
+                     output, SLOT(doDisplayError(QString)));
+    QObject::connect(request, SIGNAL(ready(qsipgaterpclib::SystemMethodSignatureResponse)),
+                     output, SLOT(doDisplayMethodSignatureResponse(qsipgaterpclib::SystemMethodSignatureResponse)));
 
 
 
