@@ -17,6 +17,9 @@
 #include "systemmethodsignaturerequest.h"
 #include "systemmethodsignatureresponse.h"
 
+#include "systemserverinforequest.h"
+#include "systemserverinforesponse.h"
+
 int main(int argc, char *argv[])
 {
     QCoreApplication app(argc, argv);
@@ -68,7 +71,7 @@ int main(int argc, char *argv[])
                      output, SLOT(doDisplayMethodHelpResponse(qsipgaterpclib::SystemMethodHelpResponse)));
 */
 
-
+/*
     std::cout << "Init request" << std::endl;
     qsipgaterpclib::SystemMethodSignatureRequest *request =
             qsipgaterpclib::SystemMethodSignatureRequestFactory::createInstance()
@@ -85,7 +88,23 @@ int main(int argc, char *argv[])
                      output, SLOT(doDisplayError(QString)));
     QObject::connect(request, SIGNAL(ready(qsipgaterpclib::SystemMethodSignatureResponse)),
                      output, SLOT(doDisplayMethodSignatureResponse(qsipgaterpclib::SystemMethodSignatureResponse)));
+*/
 
+    std::cout << "Init request" << std::endl;
+    qsipgaterpclib::SystemServerInfoRequest *request =
+            qsipgaterpclib::SystemServerInfoRequestFactory::createInstance()
+            .build();
+
+    std::cout << "Get handler" << std::endl;
+
+    std::cout << "Create output" << std::endl;
+    tests::Output *output = new tests::Output();
+    QObject::connect(rpcHandler, SIGNAL(error(QString)),
+                     output, SLOT(doDisplayError(QString)));
+    QObject::connect(request, SIGNAL(error(QString)),
+                     output, SLOT(doDisplayError(QString)));
+    QObject::connect(request, SIGNAL(ready(qsipgaterpclib::SystemServerInfoResponse)),
+                     output, SLOT(doDisplayServerInfoResponse(qsipgaterpclib::SystemServerInfoResponse)));
 
 
     std::cout << "send rpc request" << std::endl;

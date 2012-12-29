@@ -5,6 +5,7 @@
 #include "systemlistmethodsresponse.h"
 #include "systemmethodhelpresponse.h"
 #include "systemmethodsignatureresponse.h"
+#include "systemserverinforesponse.h"
 
 namespace tests {
 
@@ -18,6 +19,7 @@ public slots:
     void doDisplayListMethodsResponse(qsipgaterpclib::SystemListMethodsResponse aResponse);
     void doDisplayMethodHelpResponse(qsipgaterpclib::SystemMethodHelpResponse aResponse);
     void doDisplayMethodSignatureResponse(qsipgaterpclib::SystemMethodSignatureResponse aResponse);
+    void doDisplayServerInfoResponse(qsipgaterpclib::SystemServerInfoResponse aResponse);
     void doDisplayError(QString anError);
 };
 

@@ -35,6 +35,19 @@ void Output::doDisplayMethodSignatureResponse(qsipgaterpclib::SystemMethodSignat
     std::cout << help.toAscii().constData() << std::endl;
 }
 
+void Output::doDisplayServerInfoResponse(qsipgaterpclib::SystemServerInfoResponse aResponse)
+{
+    std::cout << "output: " << std::endl;
+    QString serverName = aResponse.getServerName();
+    std::cout << serverName.toAscii().constData() << std::endl;
+    QString serverVendor = aResponse.getServerVendor();
+    std::cout << serverVendor.toAscii().constData() << std::endl;
+    QString serverVersion = aResponse.getServerVersion();
+    std::cout << serverVersion.toAscii().constData() << std::endl;
+    QString specVersion = aResponse.getSpecVersion();
+    std::cout << specVersion.toAscii().constData() << std::endl;
+}
+
 void Output::doDisplayError(QString anError)
 {
     std::cout << "Error: " << anError.toAscii().constData() << std::endl;
