@@ -33,6 +33,7 @@ private slots:
     void testHandleResponse();
     void testHandleResponseCreateFailed();
     void testHandleResponseFailed();
+    void testHandleResponseFailed2();
     void testHandleResponseFailedWithoutMessage();
 };
 
@@ -84,7 +85,7 @@ void AbstractRequestTest::testHandleResponseCreateFailed()
 
     QCOMPARE(signalSpy.count(), 1);
     QList<QVariant> arguments = signalSpy.takeFirst();
-    QCOMPARE(arguments.at(0).toString(), QString(tr("Es ist ein Fehler aufgetreten")));
+    QCOMPARE(arguments.at(0).toString(), QString(tr("Es ist ein Fehler beim erzeugen der Antwort aufgetreten")));
 }
 
 void AbstractRequestTest::testHandleResponseFailed()
@@ -94,6 +95,24 @@ void AbstractRequestTest::testHandleResponseFailed()
     QVariantMap map;
     map.insert("StatusCode", QVariant(404));
     map.insert("StatusString", QVariant("foobar"));
+    QVariant response(map);
+
+    QSignalSpy signalSpy(&request, SIGNAL(error(QString)));
+
+    request.invokeHandleResponse(response);
+
+    QCOMPARE(signalSpy.count(), 1);
+    QList<QVariant> arguments = signalSpy.takeFirst();
+    QCOMPARE(arguments.at(0).toString(), QString(tr("Es ist ein Fehler aufgetreten (404) (foobar)")));
+}
+
+void AbstractRequestTest::testHandleResponseFailed2()
+{
+    StrictMock<MockAbstractRequest> request("foo");
+
+    QVariantMap map;
+    map.insert("faultCode", QVariant(404));
+    map.insert("faultString", QVariant("foobar"));
     QVariant response(map);
 
     QSignalSpy signalSpy(&request, SIGNAL(error(QString)));
@@ -119,7 +138,7 @@ void AbstractRequestTest::testHandleResponseFailedWithoutMessage()
 
     QCOMPARE(signalSpy.count(), 1);
     QList<QVariant> arguments = signalSpy.takeFirst();
-    QCOMPARE(arguments.at(0).toString(), QString(tr("Es ist ein Fehler aufgetreten")));
+    QCOMPARE(arguments.at(0).toString(), QString(tr("Es ist ein allgemeiner RPC Fehler aufgetreten")));
 }
 
 

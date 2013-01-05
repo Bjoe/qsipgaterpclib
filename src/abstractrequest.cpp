@@ -10,10 +10,20 @@ void AbstractRequest::handleResponse(const QVariant &aVariant)
 {
     QVariantMap variantMap = aVariant.toMap();
 
-    QVariant statusMessage = variantMap.value("StatusString");
     QVariant statusCode = variantMap.value("StatusCode");
+    if(statusCode.isValid() == false) {
+        statusCode = variantMap.value("faultCode");
+    }
+    QVariant statusMessage = variantMap.value("StatusString");
+    if(statusMessage.isValid() == false) {
+        statusMessage = variantMap.value("faultString");
+    }
 
-    if(!(statusCode.isValid() && statusCode.toInt() == 200)) {
+    if(statusCode.isValid() && statusCode.toInt() == 200) {
+        if(createResponse(variantMap) == false) {
+            emit error(tr("Es ist ein Fehler beim erzeugen der Antwort aufgetreten"));
+        }
+    } else {
         if(statusCode.isValid() && statusMessage.isValid()) {
             QString errorMessage = QString("%1 (%2) (%3)")
                     .arg(tr("Es ist ein Fehler aufgetreten"))
@@ -21,11 +31,7 @@ void AbstractRequest::handleResponse(const QVariant &aVariant)
                     .arg(statusMessage.toString());
             emit error(errorMessage);
         } else {
-            emit error(tr("Es ist ein Fehler aufgetreten"));
-        }
-    } else {
-        if(createResponse(variantMap) == false) {
-            emit error(tr("Es ist ein Fehler aufgetreten"));
+            emit error(tr("Es ist ein allgemeiner RPC Fehler aufgetreten"));
         }
     }
 }
