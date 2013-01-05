@@ -1,6 +1,10 @@
 
 #include <iostream>
 #include <QDebug>
+#include <QString>
+#include <QDate>
+#include <QTime>
+#include <QDateTime>
 #include <QxtXmlRpcClient>
 #include <QCoreApplication>
 
@@ -19,6 +23,9 @@
 
 #include "systemserverinforequest.h"
 #include "systemserverinforesponse.h"
+
+#include "samuraiaccountstatementgetrequest.h"
+#include "samuraiaccountstatementgetresponse.h"
 
 int main(int argc, char *argv[])
 {
@@ -89,7 +96,7 @@ int main(int argc, char *argv[])
     QObject::connect(request, SIGNAL(ready(qsipgaterpclib::SystemMethodSignatureResponse)),
                      output, SLOT(doDisplayMethodSignatureResponse(qsipgaterpclib::SystemMethodSignatureResponse)));
 */
-
+/*
     std::cout << "Init request" << std::endl;
     qsipgaterpclib::SystemServerInfoRequest *request =
             qsipgaterpclib::SystemServerInfoRequestFactory::createInstance()
@@ -105,6 +112,32 @@ int main(int argc, char *argv[])
                      output, SLOT(doDisplayError(QString)));
     QObject::connect(request, SIGNAL(ready(qsipgaterpclib::SystemServerInfoResponse)),
                      output, SLOT(doDisplayServerInfoResponse(qsipgaterpclib::SystemServerInfoResponse)));
+
+*/
+
+    QTime startTime(12,0,0);
+    QDate startDate(2012,7,1);
+    QTime endTime(0,0,0);
+    QDate endDate = QDate::currentDate();
+
+
+    std::cout << "Init request" << std::endl;
+    qsipgaterpclib::SamuraiAccountStatementGetRequest *request =
+            qsipgaterpclib::SamuraiAccountStatementGetRequestFactory::createInstance()
+            .withPeriodEnd(QDateTime(endDate, endTime))
+            .withPeriodStart(QDateTime(startDate, startTime))
+            .build();
+
+    std::cout << "Get handler" << std::endl;
+
+    std::cout << "Create output" << std::endl;
+    tests::Output *output = new tests::Output();
+    QObject::connect(rpcHandler, SIGNAL(error(QString)),
+                     output, SLOT(doDisplayHandlerError(QString)));
+    QObject::connect(request, SIGNAL(error(QString)),
+                     output, SLOT(doDisplayError(QString)));
+    QObject::connect(request, SIGNAL(ready(qsipgaterpclib::SamuraiAccountStatementGetResponse)),
+                     output, SLOT(doDisplayAccountStatementResponse(qsipgaterpclib::SamuraiAccountStatementGetResponse)));
 
 
     std::cout << "send rpc request" << std::endl;

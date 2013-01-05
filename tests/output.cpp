@@ -4,6 +4,7 @@
 
 #include <QString>
 #include <QList>
+#include <QVariant>
 
 namespace tests {
 
@@ -48,10 +49,40 @@ void Output::doDisplayServerInfoResponse(qsipgaterpclib::SystemServerInfoRespons
     std::cout << specVersion.toAscii().constData() << std::endl;
 }
 
+void Output::doDisplayAccountStatementResponse(qsipgaterpclib::SamuraiAccountStatementGetResponse aResponse)
+{
+    std::cout << "output: " << std::endl;
+    QString startPeriod = aResponse.getStartDate();
+    std::cout << "Start Period: " << startPeriod.toAscii().constData() << std::endl;
+    QString endPeriod = aResponse.getEndDate();
+    std::cout << "End Period: " << endPeriod.toAscii().constData() << std::endl;
+
+    QString startCurrency = aResponse.getBalanceStartCurrency();
+    double total = aResponse.getBalanceStartTotalIncludingVat();
+    std::cout << "Total Start Balance: " << total << " " << startCurrency.toAscii().constData() << std::endl;
+
+    QString endCurrency = aResponse.getBalanceEndCurrency();
+    double totalEnd = aResponse.getBalanceEndTotalIncludingVat();
+    std::cout << "Total End Balance: " << totalEnd << " " << endCurrency.toAscii().constData() << std::endl;
+
+    QList<QList<QVariant> > accountStatements = aResponse.getAccountStatements();
+
+    foreach(QList<QVariant> list, accountStatements) {
+        foreach(QVariant variant, list) {
+            std::cout << variant.toByteArray().constData() << " - ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+void Output::doDisplayHandlerError(QString anError)
+{
+    std::cout << "RPC Error: " << anError.toAscii().constData() << std::endl;
+}
+
 void Output::doDisplayError(QString anError)
 {
     std::cout << "Error: " << anError.toAscii().constData() << std::endl;
 }
-
 
 } // namespace tests

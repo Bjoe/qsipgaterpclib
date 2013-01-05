@@ -5,6 +5,7 @@ set(QT_MOC_HEADERS
     systemmethodhelprequest.h
     systemmethodsignaturerequest.h
     systemserverinforequest.h
+    samuraiaccountstatementgetrequest.h
     abstractrequest.h
 )
 
@@ -22,6 +23,8 @@ set(QT_SRCS
     systemmethodsignatureresponse.cpp
     systemserverinforequest.cpp
     systemserverinforesponse.cpp
+    samuraiaccountstatementgetrequest.cpp
+    samuraiaccountstatementgetresponse.cpp
 )
 
 # configure a header file to pass some of the CMake settings

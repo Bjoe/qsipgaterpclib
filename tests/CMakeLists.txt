@@ -56,6 +56,9 @@ qt4_test(systemmethodsignatureresponse systemmethodsignatureresponsetest.cpp)
 qt4_test(systemserverinforequest systemserverinforequesttest.cpp)
 qt4_test(systemserverinforesponse systemserverinforesponsetest.cpp)
 
+qt4_test(samuraiaccountstatementgetrequest samuraiaccountstatementgetrequesttest.cpp)
+qt4_test(samuraiaccountstatementgetresponse samuraiaccountstatementgetresponsetest.cpp)
+
 qt4_wrap_cpp(MOC_OUTFILES output.h)
 add_executable(sipgateRpcTest maintest.cpp output.cpp ${MOC_OUTFILES})
 target_link_libraries(sipgateRpcTest sipgateRpcLib ${QT_LIBRARIES} ${QXT_QXTCORE_LIB_RELEASE} ${QXT_QXTNETWORK_LIB_RELEASE})
