@@ -35,9 +35,9 @@ private:
 class SystemMethodHelpRequestFactory
 {
 public:
-    static SystemMethodHelpRequestFactory createInstance()
+    static SystemMethodHelpRequestFactory createInstance(QObject *aParent = 0)
     {
-        return SystemMethodHelpRequestFactory();
+        return SystemMethodHelpRequestFactory(aParent);
     }
 
     SystemMethodHelpRequestFactory &withMethodName(const QString &aName)
@@ -53,7 +53,7 @@ public:
     }
 
 private:
-    SystemMethodHelpRequestFactory() : request(new SystemMethodHelpRequest()), map()
+    SystemMethodHelpRequestFactory(QObject *aParent) : request(new SystemMethodHelpRequest(aParent)), map()
     {}
 
     SystemMethodHelpRequest *request;

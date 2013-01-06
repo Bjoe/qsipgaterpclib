@@ -33,9 +33,9 @@ private:
 class SystemMethodSignatureRequestFactory
 {
 public:
-    static SystemMethodSignatureRequestFactory createInstance()
+    static SystemMethodSignatureRequestFactory createInstance(QObject *aParent = 0)
     {
-        return SystemMethodSignatureRequestFactory();
+        return SystemMethodSignatureRequestFactory(aParent);
     }
 
     SystemMethodSignatureRequestFactory &withMethodName(const QString &aName)
@@ -51,7 +51,7 @@ public:
     }
 
 private:
-    SystemMethodSignatureRequestFactory() : request(new SystemMethodSignatureRequest()), map()
+    SystemMethodSignatureRequestFactory(QObject *aParent) : request(new SystemMethodSignatureRequest(aParent)), map()
     {}
 
     SystemMethodSignatureRequest *request;

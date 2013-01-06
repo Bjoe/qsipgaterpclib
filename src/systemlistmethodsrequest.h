@@ -32,9 +32,9 @@ private:
 class SystemListMethodsRequestFactory
 {
 public:
-    static SystemListMethodsRequestFactory createInstance()
+    static SystemListMethodsRequestFactory createInstance(QObject *aParent = 0)
     {
-        return SystemListMethodsRequestFactory();
+        return SystemListMethodsRequestFactory(aParent);
     }
 
     SystemListMethodsRequest *build()
@@ -43,7 +43,7 @@ public:
     }
 
 private:
-    SystemListMethodsRequestFactory() : request(new SystemListMethodsRequest())
+    SystemListMethodsRequestFactory(QObject *aParent) : request(new SystemListMethodsRequest(aParent))
     {}
 
     SystemListMethodsRequest *request;

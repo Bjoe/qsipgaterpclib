@@ -36,9 +36,9 @@ private:
 class SamuraiAccountStatementGetRequestFactory
 {
 public:
-    static SamuraiAccountStatementGetRequestFactory createInstance()
+    static SamuraiAccountStatementGetRequestFactory createInstance(QObject *aParent = 0)
     {
-        return SamuraiAccountStatementGetRequestFactory();
+        return SamuraiAccountStatementGetRequestFactory(aParent);
     }
 
     SamuraiAccountStatementGetRequestFactory &withPeriodStart(const QDateTime &aPeriodStart)
@@ -61,7 +61,7 @@ public:
     }
 
 private:
-    SamuraiAccountStatementGetRequestFactory() : request(new SamuraiAccountStatementGetRequest())
+    SamuraiAccountStatementGetRequestFactory(QObject *aParent) : request(new SamuraiAccountStatementGetRequest(aParent))
     {}
 
     SamuraiAccountStatementGetRequest *request;

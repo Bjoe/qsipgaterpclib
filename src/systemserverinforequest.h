@@ -36,9 +36,9 @@ private:
 class SystemServerInfoRequestFactory
 {
 public:
-    static SystemServerInfoRequestFactory createInstance()
+    static SystemServerInfoRequestFactory createInstance(QObject *aParent = 0)
     {
-        return SystemServerInfoRequestFactory();
+        return SystemServerInfoRequestFactory(aParent);
     }
 
     SystemServerInfoRequest* build()
@@ -47,7 +47,7 @@ public:
     }
 
 private:
-    SystemServerInfoRequestFactory() : request(new SystemServerInfoRequest())
+    SystemServerInfoRequestFactory(QObject *aParent) : request(new SystemServerInfoRequest(aParent))
     {}
 
     SystemServerInfoRequest *request;
