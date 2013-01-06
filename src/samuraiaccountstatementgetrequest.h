@@ -3,9 +3,8 @@
 
 #include <QObject>
 #include <QString>
-#include <QHash>
+#include <QMap>
 #include <QVariant>
-#include <QVariantList>
 #include <QVariantMap>
 #include <QDateTime>
 
@@ -57,9 +56,7 @@ public:
 
     SamuraiAccountStatementGetRequest* build()
     {
-        QVariantList argumentList;
-        argumentList.append(QVariant(map));
-        request->setArguments(argumentList);
+        request->addArguments(map);
         return request;
     }
 
@@ -68,7 +65,7 @@ private:
     {}
 
     SamuraiAccountStatementGetRequest *request;
-    QHash<QString, QVariant> map;
+    QMap<QString, QVariant> map;
 };
 
 

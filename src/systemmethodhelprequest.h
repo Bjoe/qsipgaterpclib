@@ -4,8 +4,7 @@
 #include <QObject>
 #include <QString>
 #include <QVariant>
-#include <QHash>
-#include <QVariantList>
+#include <QMap>
 #include <QVariantMap>
 
 #include "abstractrequest.h"
@@ -43,25 +42,22 @@ public:
 
     SystemMethodHelpRequestFactory &withMethodName(const QString &aName)
     {
-        QHash<QString, QVariant> map;
         map.insert("MethodName", QVariant(aName));
-        argumentList.append(QVariant(map));
-
         return *this;
     }
 
     SystemMethodHelpRequest* build()
     {
-        request->setArguments(argumentList);
+        request->addArguments(map);
         return request;
     }
 
 private:
-    SystemMethodHelpRequestFactory() : request(new SystemMethodHelpRequest()), argumentList()
+    SystemMethodHelpRequestFactory() : request(new SystemMethodHelpRequest()), map()
     {}
 
     SystemMethodHelpRequest *request;
-    QVariantList argumentList;
+    QMap<QString, QVariant> map;
 };
 
 } // namespace qsipgaterpclib

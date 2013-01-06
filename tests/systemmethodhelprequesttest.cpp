@@ -4,7 +4,10 @@
 #include "systemmethodhelprequest.h"
 
 #include <QString>
+#include <QMap>
 #include <QVariantList>
+
+#include "systemmethodhelpresponse.h"
 
 namespace tests {
 
@@ -26,7 +29,7 @@ void SystemMethodHelpRequestTest::testCreateInstance()
             .build();
     QCOMPARE(request->getMethod(), QString("system.methodHelp"));
     QVariantList list = request->getArguments();
-    QHash<QString, QVariant> map = list.at(0).toHash();
+    QMap<QString, QVariant> map = list.at(0).toMap();
     QCOMPARE(map.value("MethodName"), QVariant(QString("foo.bar")));
 }
 

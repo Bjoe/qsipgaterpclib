@@ -4,7 +4,10 @@
 #include "systemmethodsignaturerequest.h"
 
 #include <QString>
+#include <QMap>
 #include <QVariantList>
+
+#include "systemmethodsignatureresponse.h"
 
 namespace tests {
 
@@ -26,7 +29,7 @@ void SystemMethodSignatureRequestTest::testCreateInstance()
             .build();
     QCOMPARE(request->getMethod(), QString("system.methodSignature"));
     QVariantList list = request->getArguments();
-    QHash<QString, QVariant> map = list.at(0).toHash();
+    QMap<QString, QVariant> map = list.at(0).toMap();
     QCOMPARE(map.value("MethodName"), QVariant(QString("foo.bar")));
 }
 

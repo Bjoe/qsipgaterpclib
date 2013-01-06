@@ -4,6 +4,7 @@
 #include "abstractrequest.h"
 
 #include <QString>
+#include <QMap>
 #include <QVariant>
 #include <QVariantMap>
 #include <QList>
@@ -41,15 +42,16 @@ void AbstractRequestTest::testCreateInstance()
 {
     MockAbstractRequest request("foo");
 
-    QVariantList list;
-    list.append(QVariant("bar"));
-    request.setArguments(list);
+    QMap<QString, QVariant> map;
+    map.insert("foo", QVariant("bar"));
+    request.addArguments(map);
 
     QCOMPARE(request.getMethod(), QString("foo"));
     QVariantList arguments = request.getArguments();
     QCOMPARE(arguments.size(), 1);
     QVariant arg = arguments.takeFirst();
-    QCOMPARE(arg.toString(), QString("bar"));
+    QMap<QString, QVariant> argMap = arg.toMap();
+    QCOMPARE(argMap.value("foo"), QVariant("bar"));
 }
 
 void AbstractRequestTest::testHandleResponse()

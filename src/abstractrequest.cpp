@@ -6,6 +6,11 @@ AbstractRequest::AbstractRequest(const QString &aMethod, QObject *parent) :
     QObject(parent), arguments(), method(aMethod)
 {}
 
+void AbstractRequest::addArguments(const QMap<QString, QVariant> &aMap)
+{
+    arguments.append(QVariant(aMap));
+}
+
 void AbstractRequest::handleResponse(const QVariant &aVariant)
 {
     QVariantMap variantMap = aVariant.toMap();

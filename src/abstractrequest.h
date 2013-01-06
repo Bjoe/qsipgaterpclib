@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QString>
+#include <QMap>
 #include <QVariant>
 #include <QVariantMap>
 #include <QVariantList>
@@ -16,10 +17,7 @@ public:
     explicit AbstractRequest(const QString &aMethod, QObject *parent = 0);
     virtual ~AbstractRequest() {}
 
-    void setArguments(const QVariantList &anArguments)
-    {
-        arguments = anArguments;
-    }
+    void addArguments(const QMap<QString, QVariant> &aMap);
 
     QString getMethod() const
     {

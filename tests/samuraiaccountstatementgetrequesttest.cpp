@@ -6,6 +6,7 @@
 #include <QDate>
 #include <QTime>
 #include <QDateTime>
+#include <QMap>
 #include <QVariantList>
 
 #include "samuraiaccountstatementgetresponse.h"
@@ -40,7 +41,7 @@ void SamuraiAccountStatementGetRequestTest::testCreateInstance()
             .build();
     QCOMPARE(request->getMethod(), QString("samurai.AccountStatementGet"));
     QVariantList list = request->getArguments();
-    QHash<QString, QVariant> map = list.at(0).toHash();
+    QMap<QString, QVariant> map = list.at(0).toMap();
     QCOMPARE(map.value("PeriodStart"), QVariant(startPeriod));
     QCOMPARE(map.value("PeriodEnd"), QVariant(endPeriod));
 }
