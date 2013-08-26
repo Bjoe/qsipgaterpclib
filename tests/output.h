@@ -7,6 +7,16 @@
 #include "systemmethodsignatureresponse.h"
 #include "systemserverinforesponse.h"
 #include "samuraiaccountstatementgetresponse.h"
+#include "samuraibalancegetresponse.h"
+#include "samuraiclientidentifyresponse.h"
+#include "samuraihistorygetbydateresponse.h"
+#include "samuraiitemizedentriesgetresponse.h"
+#include "samuraiownurilistgetresponse.h"
+#include "samuraiphonebookentrygetresponse.h"
+#include "samuraiphonebooklistgetresponse.h"
+#include "samurairecommendedintervalgetresponse.h"
+#include "samuraiserverdatagetresponse.h"
+#include "samuraitoslistgetresponse.h"
 
 namespace tests {
 
@@ -22,6 +32,17 @@ public slots:
     void doDisplayMethodSignatureResponse(qsipgaterpclib::SystemMethodSignatureResponse aResponse);
     void doDisplayServerInfoResponse(qsipgaterpclib::SystemServerInfoResponse aResponse);
     void doDisplayAccountStatementResponse(qsipgaterpclib::SamuraiAccountStatementGetResponse aResponse);
+    void doDisplayBalanceGetResponse(qsipgaterpclib::SamuraiBalanceGetResponse aResponse);
+    void doDisplayClientIdentifyResponse(qsipgaterpclib::SamuraiClientIdentifyResponse aResponse);
+    void doDisplayHistoryResponse(qsipgaterpclib::SamuraiHistoryGetByDateResponse aResponse);
+    void doDisplayItemizedEntriesResponse(qsipgaterpclib::SamuraiItemizedEntriesGetResponse aResponse);
+    void doDisplayOwnUriListResponse(qsipgaterpclib::SamuraiOwnUriListGetResponse aResponse);
+    void doDisplayPhonebookEntryResponse(qsipgaterpclib::SamuraiPhonebookEntryGetResponse aResponse);
+    void doDisplayPhonebookListResponse(qsipgaterpclib::SamuraiPhonebookListGetResponse aResponse);
+    void doDisplayIntervalResponse(qsipgaterpclib::SamuraiRecommendedIntervalGetResponse aResponse);
+    void doDisplayServerdataResponse(qsipgaterpclib::SamuraiServerdataGetResponse aResponse);
+    void doDisplayTosListResponse(qsipgaterpclib::SamuraiTosListGetResponse aResponse);
+
     void doDisplayHandlerError(QString anError);
     void doDisplayError(QString anError);
 };

@@ -113,8 +113,8 @@ void SamuraiAccountStatementGetResponseTest::testGet()
                      QVariant(balanceEnd));
     QCOMPARE(response.getStartPeriod(), QDateTime(startDate, startTime));
     QCOMPARE(response.getEndPeriod(), QDateTime(endDate, endTime));
-    QCOMPARE(response.getStartDate(), QString("So. Jul 1 2012"));
-    QCOMPARE(response.getEndDate(), QString("Fr. Jan 4 2013"));
+    QCOMPARE(response.getStartDate(), QDate(startDate).toString());
+    QCOMPARE(response.getEndDate(), QDate(endDate).toString());
     QCOMPARE(response.getBalanceStartTotalIncludingVat(), totalStart);
     QCOMPARE(response.getBalanceStartCurrency(), QString("EUR"));
     QCOMPARE(response.getBalanceStartTotalExcludingVat(), totalExcludeStart);

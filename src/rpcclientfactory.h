@@ -1,6 +1,7 @@
 #ifndef QSIPGATERPCLIB_RPCCLIENTFACTORY_H
 #define QSIPGATERPCLIB_RPCCLIENTFACTORY_H
 
+#include <QObject>
 #include <QxtXmlRpcClient>
 
 namespace qsipgaterpclib
@@ -9,9 +10,9 @@ namespace qsipgaterpclib
 class RpcClientFactory
 {
 public:
-    static RpcClientFactory createInstance()
+    static RpcClientFactory createInstance(QObject *aParent = 0)
     {
-        return RpcClientFactory();
+        return RpcClientFactory(aParent);
     }
 
     RpcClientFactory &withUrl(const QString &anUrl)
@@ -32,20 +33,13 @@ public:
         return *this;
     }
 
-    QxtXmlRpcClient *build() const
-    {
-        QUrl httpUrl(url);
-        httpUrl.setUserName(userName);
-        httpUrl.setPassword(password);
-        QxtXmlRpcClient *rpcClient = new QxtXmlRpcClient();
-        rpcClient->setServiceUrl(httpUrl);
-        return rpcClient;
-    }
+    QxtXmlRpcClient *build() const;
 
 private:
-    RpcClientFactory() : url(), userName(), password()
+    RpcClientFactory(QObject *aParent) : parent(aParent), url(), userName(), password()
     {}
 
+    QObject *parent;
     QString url;
     QString userName;
     QString password;

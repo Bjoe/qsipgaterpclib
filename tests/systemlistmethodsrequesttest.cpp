@@ -21,14 +21,14 @@ private slots:
 
 void SystemListMethodsRequestTest::testCreateInstance()
 {
-    qsipgaterpclib::SystemListMethodsRequest *request = qsipgaterpclib::SystemListMethodsRequestFactory::createInstance().build();
+    qsipgaterpclib::SystemListMethodsRequest *request = qsipgaterpclib::SystemListMethodsRequestFactory::createInstance(this).build();
     QCOMPARE(request->getMethod(), QString("system.listMethods"));
     QCOMPARE(request->getArguments(), QVariantList());
 }
 
 void SystemListMethodsRequestTest::testCreateResponse()
 {
-    qsipgaterpclib::SystemListMethodsRequest *request = qsipgaterpclib::SystemListMethodsRequestFactory::createInstance().build();
+    qsipgaterpclib::SystemListMethodsRequest *request = qsipgaterpclib::SystemListMethodsRequestFactory::createInstance(this).build();
 
     QSignalSpy signalSpy(request, SIGNAL(ready(qsipgaterpclib::SystemListMethodsResponse)));
 
@@ -45,7 +45,7 @@ void SystemListMethodsRequestTest::testCreateResponse()
 
 void SystemListMethodsRequestTest::testCreateResponseFailed()
 {
-    qsipgaterpclib::SystemListMethodsRequest *request = qsipgaterpclib::SystemListMethodsRequestFactory::createInstance().build();
+    qsipgaterpclib::SystemListMethodsRequest *request = qsipgaterpclib::SystemListMethodsRequestFactory::createInstance(this).build();
 
     QSignalSpy signalSpy(request, SIGNAL(ready(qsipgaterpclib::SystemListMethodsResponse)));
 

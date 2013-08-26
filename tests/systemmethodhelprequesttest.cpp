@@ -24,7 +24,7 @@ private slots:
 void SystemMethodHelpRequestTest::testCreateInstance()
 {
     qsipgaterpclib::SystemMethodHelpRequest *request =
-            qsipgaterpclib::SystemMethodHelpRequestFactory::createInstance()
+            qsipgaterpclib::SystemMethodHelpRequestFactory::createInstance(this)
             .withMethodName("foo.bar")
             .build();
     QCOMPARE(request->getMethod(), QString("system.methodHelp"));
@@ -36,7 +36,7 @@ void SystemMethodHelpRequestTest::testCreateInstance()
 void SystemMethodHelpRequestTest::testCreateResponse()
 {
     qsipgaterpclib::SystemMethodHelpRequest *request =
-            qsipgaterpclib::SystemMethodHelpRequestFactory::createInstance()
+            qsipgaterpclib::SystemMethodHelpRequestFactory::createInstance(this)
             .withMethodName("foo.bar")
             .build();
 
@@ -55,7 +55,7 @@ void SystemMethodHelpRequestTest::testCreateResponse()
 void SystemMethodHelpRequestTest::testCreateResponseFailed()
 {
     qsipgaterpclib::SystemMethodHelpRequest *request =
-            qsipgaterpclib::SystemMethodHelpRequestFactory::createInstance()
+            qsipgaterpclib::SystemMethodHelpRequestFactory::createInstance(this)
             .withMethodName("foo.bar")
             .build();
 

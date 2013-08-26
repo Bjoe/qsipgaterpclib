@@ -24,8 +24,8 @@ namespace tests {
 
 void RpcHandlerTest::testSendRequest()
 {
-    QxtXmlRpcClient *rpcClient = new QxtXmlRpcClient();
-    qsipgaterpclib::RpcHandler *handler = new qsipgaterpclib::RpcHandler(rpcClient);
+    QxtXmlRpcClient *rpcClient = new QxtXmlRpcClient(this);
+    qsipgaterpclib::RpcHandler *handler = new qsipgaterpclib::RpcHandler(rpcClient, this);
 
     MockAbstractRequest mock("mock");
     handler->sendRpcRequest(&mock);
@@ -70,7 +70,7 @@ void RpcHandlerTest::testRpcError()
     QFETCH(QNetworkReply::NetworkError, code);
     QFETCH(QString, expected);
 
-    qsipgaterpclib::RpcHandler *handler = new qsipgaterpclib::RpcHandler(0);
+    qsipgaterpclib::RpcHandler *handler = new qsipgaterpclib::RpcHandler(0, this);
 
     QSignalSpy signalSpy(handler, SIGNAL(error(QString)));
 
@@ -201,7 +201,7 @@ void RpcHandlerTest::testRpcSslError()
     QFETCH(QList<QSslError>, codeList);
     QFETCH(QString, expected);
 
-    qsipgaterpclib::RpcHandler *handler = new qsipgaterpclib::RpcHandler(0);
+    qsipgaterpclib::RpcHandler *handler = new qsipgaterpclib::RpcHandler(0, this);
 
     QSignalSpy signalSpy(handler, SIGNAL(error(QString)));
 

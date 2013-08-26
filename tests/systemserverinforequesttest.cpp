@@ -23,7 +23,7 @@ private slots:
 void SystemServerInfoRequestTest::testCreateInstance()
 {
     qsipgaterpclib::SystemServerInfoRequest *request =
-            qsipgaterpclib::SystemServerInfoRequestFactory::createInstance()
+            qsipgaterpclib::SystemServerInfoRequestFactory::createInstance(this)
             .build();
     QCOMPARE(request->getMethod(), QString("system.serverInfo"));
     QVariantList list = request->getArguments();
@@ -33,7 +33,7 @@ void SystemServerInfoRequestTest::testCreateInstance()
 void SystemServerInfoRequestTest::testCreateResponse()
 {
     qsipgaterpclib::SystemServerInfoRequest *request =
-            qsipgaterpclib::SystemServerInfoRequestFactory::createInstance()
+            qsipgaterpclib::SystemServerInfoRequestFactory::createInstance(this)
             .build();
 
     QSignalSpy signalSpy(request, SIGNAL(ready(qsipgaterpclib::SystemServerInfoResponse)));
@@ -58,7 +58,7 @@ void SystemServerInfoRequestTest::testCreateResponse()
 void SystemServerInfoRequestTest::testCreateResponseFailed()
 {
     qsipgaterpclib::SystemServerInfoRequest *request =
-            qsipgaterpclib::SystemServerInfoRequestFactory::createInstance()
+            qsipgaterpclib::SystemServerInfoRequestFactory::createInstance(this)
             .build();
 
     QSignalSpy signalSpy(request, SIGNAL(ready(qsipgaterpclib::SystemServerInfoResponse)));

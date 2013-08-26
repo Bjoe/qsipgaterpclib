@@ -1,0 +1,15 @@
+# - Config file for the QPjSIP package
+# It defines the following variables
+#  QSIPGATERPC_INCLUDE_DIRS - include directories for QPjSIP
+#  QSIPGATERPC_LIBRARIES    - libraries to link against
+#  QSIPGATERPC_EXECUTABLE   - the bar executable
+
+# Compute paths
+get_filename_component(QSIPGATERPC_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+
+# Our library dependencies (contains definitions for IMPORTED targets)
+include("${QSIPGATERPC_CMAKE_DIR}/QsipgateRpcTargets.cmake")
+
+set(QSIPGATERPC_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
+# These are IMPORTED targets created by QsipgateRpcTargets.cmake
+set(QSIPGATERPC_LIBRARIES qsipgaterpc)

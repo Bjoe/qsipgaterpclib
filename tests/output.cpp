@@ -75,6 +75,140 @@ void Output::doDisplayAccountStatementResponse(qsipgaterpclib::SamuraiAccountSta
     }
 }
 
+void Output::doDisplayBalanceGetResponse(qsipgaterpclib::SamuraiBalanceGetResponse aResponse)
+{
+    std::cout << "output: " << std::endl;
+    QDateTime dateTime = aResponse.getBalanceTime();
+    std::cout << "Timestamp: " << dateTime.toString().toAscii().constData() << std::endl;
+    QVariant totalExcludingVat = aResponse.getTotalExcludingVat();
+    std::cout << "Total excluding Vat: " << totalExcludingVat.toByteArray().constData() << std::endl;
+    QVariant vatAmount = aResponse.getVatAmount();
+    std::cout << "Vat amount: " << vatAmount.toByteArray().constData() << std::endl;
+    QVariant totalIncludingVat = aResponse.getTotalIncludingVat();
+    std::cout << "Total including Vat: " << totalIncludingVat.toByteArray().constData() << std::endl;
+    QVariant vatPercent = aResponse.getVatPercent();
+    std::cout << "Vat percent: " << vatPercent.toByteArray().constData() << std::endl;
+}
+
+void Output::doDisplayHistoryResponse(qsipgaterpclib::SamuraiHistoryGetByDateResponse aResponse)
+{
+    std::cout << "output: " << std::endl;
+    QList<QList<QVariant> > list = aResponse.getHistoryEntrys();
+    foreach(QList<QVariant> line, list) {
+        foreach(QVariant variant, line) {
+            std::cout << variant.toByteArray().constData() << " - ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+void Output::doDisplayTosListResponse(qsipgaterpclib::SamuraiTosListGetResponse aResponse)
+{
+    std::cout << "output: " << std::endl;
+    QList<QString> list = aResponse.getTosList();
+    foreach(QString line, list) {
+        std::cout << line.toAscii().constData() << " - ";
+    }
+    std::cout << std::endl;
+}
+
+void Output::doDisplayOwnUriListResponse(qsipgaterpclib::SamuraiOwnUriListGetResponse aResponse)
+{
+    std::cout << "output: " << std::endl;
+    QList<QList<QVariant> > list = aResponse.getOwnUriList();
+    foreach(QList<QVariant> line, list) {
+        std::cout << line.at(0).toByteArray().constData() << std::endl;
+        std::cout << line.at(1).toByteArray().constData() << std::endl;
+        std::cout << line.at(4).toByteArray().constData() << std::endl;
+        std::cout << line.at(5).toByteArray().constData() << std::endl;
+
+        std::cout << "E164 List: " << std::endl;
+        QList<QVariant> e164List = line.at(2).toList();
+        foreach(QVariant variant, e164List) {
+            std::cout << variant.toByteArray().constData() << " - ";
+        }
+        std::cout << std::endl;
+
+        std::cout << "Tos List: " << std::endl;
+        QList<QVariant> tosList = line.at(3).toList();
+        foreach(QVariant variant, tosList) {
+            std::cout << variant.toByteArray().constData() << " - ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+void Output::doDisplayItemizedEntriesResponse(qsipgaterpclib::SamuraiItemizedEntriesGetResponse aResponse)
+{
+    std::cout << "output: " << std::endl;
+    QDateTime startTime = aResponse.getPeriodStart();
+    QDateTime endTime = aResponse.getPeriodEnd();
+    std::cout << startTime.toString().toAscii().constData() << " - " << endTime.toString().toAscii().constData() << std::endl;
+
+    QList<QList<QVariant> > list = aResponse.getItemizedEntries();
+    foreach(QList<QVariant> line, list) {
+        foreach(QVariant variant, line) {
+            std::cout << variant.toByteArray().constData() << " - ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+void Output::doDisplayPhonebookEntryResponse(qsipgaterpclib::SamuraiPhonebookEntryGetResponse aResponse)
+{
+    std::cout << "output: " << std::endl;
+    QList<QList<QVariant> > list = aResponse.getEntryList();
+    foreach(QList<QVariant> line, list) {
+        foreach(QVariant variant, line) {
+            std::cout << variant.toByteArray().constData() << " - ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+void Output::doDisplayPhonebookListResponse(qsipgaterpclib::SamuraiPhonebookListGetResponse aResponse)
+{
+    std::cout << "output: " << std::endl;
+    QList<QList<QVariant> > list = aResponse.getPhonebookList();
+    foreach(QList<QVariant> line, list) {
+        foreach(QVariant variant, line) {
+            std::cout << variant.toByteArray().constData() << " - ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+void Output::doDisplayIntervalResponse(qsipgaterpclib::SamuraiRecommendedIntervalGetResponse aResponse)
+{
+    std::cout << "output: " << std::endl;
+    QList<QList<QVariant> > list = aResponse.getIntervalList();
+    foreach(QList<QVariant> line, list) {
+        foreach(QVariant variant, line) {
+            std::cout << variant.toByteArray().constData() << " - ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+void Output::doDisplayServerdataResponse(qsipgaterpclib::SamuraiServerdataGetResponse aResponse)
+{
+    std::cout << "output: " << std::endl;
+    std::cout << "Sip registrar: " << aResponse.getSipRegistrarServer().toAscii().constData() << std::endl;
+    std::cout << "Sip outbound proxy: " << aResponse.getSipOutboundProxy().toAscii().constData() << std::endl;
+    std::cout << "STUN server: " << aResponse.getStunServer().toAscii().constData() << std::endl;
+    std::cout << "NTP server: " << aResponse.getNtpServer().toAscii().constData() << std::endl;
+    std::cout << "HTTP server: " << aResponse.getHttpServer().toAscii().constData() << std::endl;
+    std::cout << "Samurai server: " << aResponse.getSamuraiServer().toAscii().constData() << std::endl;
+    std::cout << "Simple server: " << aResponse.getSimpleServer().toAscii().constData() << std::endl;
+    std::cout << "XMPP server: " << aResponse.getXmppServer().toAscii().constData() << std::endl;
+}
+
+void Output::doDisplayClientIdentifyResponse(qsipgaterpclib::SamuraiClientIdentifyResponse aResponse)
+{
+    std::cout << "output: " << std::endl;
+    std::cout << "Receive response." << std::endl;
+}
+
 void Output::doDisplayHandlerError(QString anError)
 {
     std::cout << "RPC Error: " << anError.toAscii().constData() << std::endl;

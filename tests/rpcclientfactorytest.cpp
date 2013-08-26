@@ -9,7 +9,7 @@ namespace tests
 
 void RpcClientFactoryTest::testCreateInstance()
 {
-    QxtXmlRpcClient *rpcClient = qsipgaterpclib::RpcClientFactory::createInstance()
+    QxtXmlRpcClient *rpcClient = qsipgaterpclib::RpcClientFactory::createInstance(this)
             .withUrl("http://foo.bar")
             .withUserName("joe")
             .withPassword("bar")

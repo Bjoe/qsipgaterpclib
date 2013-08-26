@@ -35,7 +35,7 @@ void SamuraiAccountStatementGetRequestTest::testCreateInstance()
     QDateTime endPeriod(endDate, endTime);
 
     qsipgaterpclib::SamuraiAccountStatementGetRequest *request =
-            qsipgaterpclib::SamuraiAccountStatementGetRequestFactory::createInstance()
+            qsipgaterpclib::SamuraiAccountStatementGetRequestFactory::createInstance(this)
             .withPeriodEnd(endPeriod)
             .withPeriodStart(startPeriod)
             .build();
@@ -58,7 +58,7 @@ void SamuraiAccountStatementGetRequestTest::testCreateResponse()
     QDateTime endPeriod(endDate, endTime);
 
     qsipgaterpclib::SamuraiAccountStatementGetRequest *request =
-            qsipgaterpclib::SamuraiAccountStatementGetRequestFactory::createInstance()
+            qsipgaterpclib::SamuraiAccountStatementGetRequestFactory::createInstance(this)
             .withPeriodEnd(endPeriod)
             .withPeriodStart(startPeriod)
             .build();
@@ -91,7 +91,7 @@ void SamuraiAccountStatementGetRequestTest::testCreateResponseFailed()
     QDateTime endPeriod(endDate, endTime);
 
     qsipgaterpclib::SamuraiAccountStatementGetRequest *request =
-            qsipgaterpclib::SamuraiAccountStatementGetRequestFactory::createInstance()
+            qsipgaterpclib::SamuraiAccountStatementGetRequestFactory::createInstance(this)
             .withPeriodEnd(endPeriod)
             .withPeriodStart(startPeriod)
             .build();

@@ -24,7 +24,7 @@ private slots:
 void SystemMethodSignatureRequestTest::testCreateInstance()
 {
     qsipgaterpclib::SystemMethodSignatureRequest *request =
-            qsipgaterpclib::SystemMethodSignatureRequestFactory::createInstance()
+            qsipgaterpclib::SystemMethodSignatureRequestFactory::createInstance(this)
             .withMethodName("foo.bar")
             .build();
     QCOMPARE(request->getMethod(), QString("system.methodSignature"));
@@ -36,7 +36,7 @@ void SystemMethodSignatureRequestTest::testCreateInstance()
 void SystemMethodSignatureRequestTest::testCreateResponse()
 {
     qsipgaterpclib::SystemMethodSignatureRequest *request =
-            qsipgaterpclib::SystemMethodSignatureRequestFactory::createInstance()
+            qsipgaterpclib::SystemMethodSignatureRequestFactory::createInstance(this)
             .withMethodName("foo.bar")
             .build();
 
@@ -55,7 +55,7 @@ void SystemMethodSignatureRequestTest::testCreateResponse()
 void SystemMethodSignatureRequestTest::testCreateResponseFailed()
 {
     qsipgaterpclib::SystemMethodSignatureRequest *request =
-            qsipgaterpclib::SystemMethodSignatureRequestFactory::createInstance()
+            qsipgaterpclib::SystemMethodSignatureRequestFactory::createInstance(this)
             .withMethodName("foo.bar")
             .build();
 
